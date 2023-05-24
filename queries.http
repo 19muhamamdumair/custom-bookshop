@@ -1,0 +1,29 @@
+GET http://localhost:4004/catalog/Books
+
+###
+
+POST http://localhost:4004/catalog/Books
+Content-Type: application/json
+
+{"ID":"1","title":"My fav book2","stock": 445,"author_ID":107}
+###
+PUT http://localhost:4004/catalog/Books/10
+Content-Type: application/json
+
+{"ID":10,"title":"My new book","stock":20}
+
+###
+DELETE http://localhost:4004/catalog/Books/10
+
+###
+POST http://localhost:4004/catalog/Orders
+Content-Type: application/json
+
+{"ID":"b658f71e-299b-403c-b5f6-855e15cfc1cc","book_ID":421,"quantity":10}
+
+###
+# Browse Books as any user
+GET http://localhost:4004/catalog/Books?
+#   &$select=title,descr
+#   &$expand=currency
+  &sap-locale=fr
