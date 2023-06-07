@@ -1,0 +1,32 @@
+<mvc:View xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:macros="sap.fe.macros"
+    xmlns:html="http://www.w3.org/1999/xhtml" controllerName="testingcustom.controller.Detail">
+    <Page id="Form" title="Form">
+	<customHeader>
+			<Bar>
+				
+				<contentRight>
+					<ToggleButton
+						icon="sap-icon://cart"
+						pressed="{= ${appView>/layout}.startsWith('ThreeColumns') }"
+						tooltip="{i18n>toCartButtonTooltip}"
+						press=".onToggleCart">
+					</ToggleButton>
+				</contentRight>
+			</Bar>
+		</customHeader>
+        <content>
+            <Panel headerText="Product information" >
+		        <macros:Form metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#BasicInfo" id="main"/>
+	        </Panel>
+                        
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button text="Add to Cart" press=".addToCartAction" type="Emphasized"
+                    visible="{viewModel>/editable}" />  
+            </OverflowToolbar>    
+        </footer>
+    </Page>
+</mvc:View>

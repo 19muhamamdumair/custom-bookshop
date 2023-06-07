@@ -2,7 +2,7 @@
 sap.ui.define(["sap/fe/core/PageController","sap/ui/model/json/JSONModel"], function (PageController,JSONModel) {
 	"use strict";
 
-	return PageController.extend("bookshopfe.myViewTest", {
+	return PageController.extend("bookshopfe.detail", {
 
 
 		onInit: function (cartData) {

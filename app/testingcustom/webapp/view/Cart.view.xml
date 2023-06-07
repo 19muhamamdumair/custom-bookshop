@@ -1,0 +1,64 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:macros="sap.fe.macros"
+	controllerName="testingcustom.controller.Cart"
+
+>
+	<f:DynamicPage id="dynamicPageId" headerExpanded="true" toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle id="incidentProcessFlowDynamicPageTitle">
+				<f:heading>
+					<Title id="incidentProcessFlowHeading" text="Cart" />
+				</f:heading>
+			
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:content>
+			<VBox> 
+
+			<List
+			id="cartId"
+			items="{/Cart}"
+			headerText="Cart">
+			<ObjectListItem
+				title="{title}"
+				type="Active"
+				press="onListItemPress"
+				number="{quantity}"
+				numberUnit="{ID}">
+			<!-- <firstStatus>
+				<ObjectStatus
+					text="{Status}"
+					state="{
+						path: 'Status',
+						formatter: 'sap.m.sample.ObjectListItem.Formatter.status'
+					}" />
+			</firstStatus> -->
+			<ObjectAttribute text="{amount}" />
+			<!-- <ObjectAttribute text="{Width} x {Depth} x {Height} {DimUnit}" /> -->
+		</ObjectListItem>
+	</List>
+	<FlexBox
+			height="100px"
+			alignItems="End"
+			justifyContent="End"
+	>
+				<Button type="Accept"
+						text="Proceed"
+						press=".onProceed"
+						ariaDescribedBy="acceptButtonDescription genericButtonDescription">
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</Button>
+	</FlexBox>
+			
+			</VBox>
+
+		</f:content>
+	</f:DynamicPage>
+    
+</mvc:View>

@@ -49,6 +49,18 @@ modules:
       - flexiblelayout.zip
       name: flexiblelayout
       target-path: resources/
+    - artifacts:
+      - testingcustom.zip
+      name: testingcustom
+      target-path: resources/
+    - artifacts:
+      - testingproject.zip
+      name: testingproject
+      target-path: resources/
+    - artifacts:
+      - newcustomapplication.zip
+      name: newcustomapplication
+      target-path: resources/
 - name: bookshopfe
   type: html5
   path: app/bookshop-fe
@@ -112,6 +124,36 @@ modules:
 - name: flexiblelayout
   type: html5
   path: app/flexiblelayout
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: testingcustom
+  type: html5
+  path: app/testingcustom
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: testingproject
+  type: html5
+  path: app/testingproject
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: newcustomapplication
+  type: html5
+  path: app/newcustomapplication
   build-parameters:
     build-result: dist
     builder: custom

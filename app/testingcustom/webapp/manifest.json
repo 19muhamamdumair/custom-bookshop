@@ -1,19 +1,20 @@
 {
-    "_version": "1.49.0",
+    "_version": "1.12.0",
+    
     "sap.app": {
-        "id": "bookshopfe",
+        "id": "testingcustom",
         "type": "application",
         "i18n": "i18n/i18n.properties",
         "applicationVersion": {
-            "version": "0.0.1"
+            "version": "1.19.0"
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
         "resources": "resources.json",
         "sourceTemplate": {
-            "id": "@sap/generator-fiori:lrop",
-            "version": "1.9.2",
-            "toolsId": "ff16db7f-cdf4-4576-aed5-fc25894b7d2b"
+            "id": "@sap/generator-fiori:fpm",
+            "version": "1.13.7",
+            "toolsId": "9aee8a57-70c7-4691-b59c-3c4517e9331a"
         },
         "dataSources": {
             "mainService": {
@@ -23,6 +24,13 @@
                     "annotations": [],
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "../annotations.cds",
+                "settings": {
+                    "localUri": "../annotations.cds"
                 }
             }
         }
@@ -44,15 +52,24 @@
         }
     },
     "sap.ui5": {
+       
+        "rootView": {
+            "viewName": "sap.fe.core.rootView.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+            },
         "flexEnabled": true,
         "dependencies": {
-            "minUI5Version": "1.112.0",
+            "minUI5Version": "1.111.1",
             "libs": {
                 "sap.m": {},
                 "sap.ui.core": {},
                 "sap.ushell": {},
                 "sap.fe.templates": {},
-                "sap.f": {}
+                "sap.f": {},
+                "sap.uxap": {}
+
             }
         },
         "contentDensities": {
@@ -63,8 +80,9 @@
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "settings": {
-                    "bundleName": "bookshopfe.i18n.i18n"
+                    "bundleName": "testingcustom.i18n.i18n"
                 }
+                
             },
             "": {
                 "dataSource": "mainService",
@@ -85,49 +103,62 @@
             "css": []
         },
         "routing": {
+            "config": {
+                "routerClass": "sap.f.routing.Router",
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                }
+            },
+            
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "BooksList",
+                    "name": "list",
                     "target": [
-                        "BooksList"
+                        "list"
                     ]
                 },
                 {
                     "pattern": "Books({key}):?query:",
-                    "name": "BooksObjectPage",
+                    "name": "detail",
                     "target": [
-                        "BooksList",
-                        "BooksObjectPage",
-                        "BooksDetailPage"
+                        "list",
+                        "detail"
                     ]
                 },
                 {
-                    "pattern": "Cart({key}):?query:",
-                    "name": "BooksDetailPage",
+                    "pattern": "Books({key})/Cart:?query:",
+                    "name": "cart",
                     "target": [
-                        "BooksList",
-                        "BooksObjectPage",
-                        "BooksDetailPage"
+                        "list",
+                        "detail",
+                        "cart"
+                    ]
+                },
+                {
+                    "pattern": "Wizard:?query:",
+                    "name": "wizard",
+                    "target": [
+                        "wizard"
                     ]
                 }
             ],
             "targets": {
-                "BooksList": {
+                "list": {
                     "type": "Component",
-                    "id": "BooksList",
-                    "name": "sap.fe.templates.ListReport",
+                    "name": "sap.fe.core.fpm",
                     "options": {
                         "settings": {
-                            "entitySet": "Books",
-                            "variantManagement": "Page",
+                            "viewName": "testingcustom.view.List",
                             "navigation": {
                                 "Books": {
-                                    "detail": {
-                                        "route": "BooksObjectPage"
-                                    }
+                                  "detail": {
+                                    "route": "detail"
+                                  }
                                 }
-                            },
+                              },
+                              
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "columns": {
@@ -140,7 +171,7 @@
                                                 "placement": "After",
                                                 "anchor": "author_ID"
                                             },
-                                            "template": "bookshopfe.ext.fragments.CustomColumnButton",
+                                            "template": "testingcustom.ext.fragments.CustomColumnButton",
                                             "availability": "Default",
                                             "properties": [
                                                 "ID"
@@ -148,59 +179,74 @@
                                         }
                                     }
                                 }
-                            },
-                            "initialLoad": "Enabled"
+                            }
                         }
                     },
+                    "title": "Main Page",
+                    "id": "1",
                     "controlAggregation": "beginColumnPages",
                     "contextPattern": ""
                 },
-                "BooksObjectPage": {
+                "detail": {
                     "type": "Component",
-                    "id": "BooksObjectPage",
                     "name": "sap.fe.core.fpm",
                     "options": {
-                        "settings": {
-                            "viewName": "bookshopfe.myViewTest",
-                            "entitySet": "Books",
-                            "navigation": {}
+                        "settings": {                          
+                            "viewName":"testingcustom.view.Detail",
+                            "entitySet": "Books"
                         }
                     },
+                    "title": "Detail Page",
+                    "id": "2",
                     "controlAggregation": "midColumnPages",
                     "contextPattern": ""
                 },
-                "BooksDetailPage": {
+                "cart": {
                     "type": "Component",
-                    "id": "BooksDetailtPage",
                     "name": "sap.fe.core.fpm",
                     "options": {
                         "settings": {
-                            "viewName": "bookshopfe.detail",
-                            "entitySet": "Books",
-                            "navigation": {}
+                            "viewName": "testingcustom.view.Cart",
+                           "entitySet":"Cart"
                         }
                     },
-                    "controlAggregation": "endColumnPages",
+                    "title": "Detail Page",
+                    "id": "3",
+                    "controlAggregation": "endColumnPages"
+                },
+                "wizard": {
+                    "type": "Component",
+                    "name": "sap.fe.core.fpm",
+                    "options": {
+                        "settings": {
+                            "viewName": "testingcustom.view.Wizard",
+                            "entitySet":"Cart"
+                        }
+                    },
+                    "title": "Wizard Page",
+                    "id": "4",
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern":""
+                },
+                "timeline": {
+                    "type": "Component",
+                    "name": "sap.fe.core.fpm",
+                    "options": {
+                        "settings": {
+                            "viewName": "testingcustom.view.Timeline",
+                           "entitySet":"Cart"
+                        }
+                    },
+                    "title": "Timeline Page",
+                    "id": "5",
+                    "controlAggregation": "beginColumnPages",
                     "contextPattern": ""
                 }
-            },
-            "config": {
-                "flexibleColumnLayout": {
-                    "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
-                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
-                },
-                "routerClass": "sap.f.routing.Router"
             }
-        },
-        "rootView": {
-            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
-            "type": "XML",
-            "async": true,
-            "id": "appRootView"
         }
     },
-    "sap.fiori": {
-        "registrationIds": [],
-        "archeType": "transactional"
+    "sap.cloud": {
+        "public": true,
+        "service": "bookshop-app"
     }
 }

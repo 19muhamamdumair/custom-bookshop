@@ -1,4 +1,4 @@
-GET http://localhost:4004/catalog/Books
+GET http://localhost:4004/catalog/Cart
 
 ###
 

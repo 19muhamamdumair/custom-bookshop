@@ -13,7 +13,7 @@ sap.ui.define(["sap/m/MessageBox"], function(MessageBox) {
             var cartData = {
                 "book_id": parseInt(data.ID),
                 "title": data.title,
-                "quantity": 2,
+                "quantity": 1,
                 "amount": 200.00
             };
 

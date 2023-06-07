@@ -1,0 +1,28 @@
+<mvc:View xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:macros="sap.fe.macros"
+    controllerName="testingcustom.controller.Wizard">
+    
+    
+    <Page id="wizard" title="wizard">
+
+    <customHeader>
+			<Bar id="wizardbar">
+				
+				<contentLeft>
+					<ToggleButton
+                        id="backToHome"
+						icon="sap-icon://nav-back"
+						pressed="{= ${appView>/layout}.startsWith('ThreeColumns') }"
+						tooltip="{i18n>toCartButtonTooltip}"
+						press=".onNavBack">
+					</ToggleButton>
+				</contentLeft>
+			</Bar>
+            </customHeader>
+    
+        <content>
+                <Text id="testing" text="Testing"></Text>
+        </content>
+    </Page>
+    
+</mvc:View>
